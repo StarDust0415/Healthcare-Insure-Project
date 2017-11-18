@@ -7,6 +7,8 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Organization.CharityAdminOrganization;
+import Business.Organization.FundManagingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UserInterface.FundManagerRole.FundManagerWorkAreaJPanel;
@@ -19,8 +21,8 @@ import javax.swing.JPanel;
 public class FundManagerRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new FundManagerWorkAreaJPanel();
+    public JPanel createWorkArea(JPanel card, UserAccount account, Organization org, Enterprise ent, EcoSystem business) {
+        return new FundManagerWorkAreaJPanel(card, account,(FundManagingOrganization)org, ent);
     }
     
 }

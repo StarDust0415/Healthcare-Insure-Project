@@ -5,6 +5,9 @@
  */
 package UserInterface.EnterpriseAdminRole;
 
+import Business.Enterprise.Enterprise;
+import javax.swing.JPanel;
+
 /**
  *
  * @author tianchenglin
@@ -14,7 +17,9 @@ public class EnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form EnterpriseAdminWorkAreaJPanel
      */
-    public EnterpriseAdminWorkAreaJPanel() {
+    
+
+    public EnterpriseAdminWorkAreaJPanel(JPanel panel, Enterprise enterprise) {
         initComponents();
     }
 

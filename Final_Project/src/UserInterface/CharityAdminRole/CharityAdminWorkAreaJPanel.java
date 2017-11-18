@@ -5,6 +5,11 @@
  */
 package UserInterface.CharityAdminRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Organization.CharityAdminOrganization;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author tianchenglin
@@ -14,8 +19,9 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CharityAdminWorkAreaJPanel
      */
-    public CharityAdminWorkAreaJPanel() {
-        initComponents();
+   
+    public CharityAdminWorkAreaJPanel(JPanel card, UserAccount account, CharityAdminOrganization charityAdminOrganization, Enterprise ent) {
+       initComponents();
     }
 
     /**

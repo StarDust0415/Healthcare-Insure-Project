@@ -5,6 +5,11 @@
  */
 package UserInterface.FundManagerRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Organization.FundManagingOrganization;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author tianchenglin
@@ -14,7 +19,8 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form FundManagerWorkAreaJPanel
      */
-    public FundManagerWorkAreaJPanel() {
+   
+    public FundManagerWorkAreaJPanel(JPanel card, UserAccount account, FundManagingOrganization fundManagingOrganization, Enterprise ent) {
         initComponents();
     }
 

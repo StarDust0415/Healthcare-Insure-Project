@@ -21,6 +21,5 @@ public class CharityAdminOrganization extends Organization {
     @Override
     public ArrayList<Role> getSupportedRole() {
         return null;
-    }
-    
+    }    
 }
