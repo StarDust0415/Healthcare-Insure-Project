@@ -3,25 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.AdministrativeRole;
-
-import Business.Enterprise.Enterprise;
-import javax.swing.JPanel;
+package UserInterface.CharityAdminRole;
 
 /**
  *
  * @author tianchenglin
  */
-public class AdminWorkAreaJPanel extends javax.swing.JPanel {
+public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
 
-    JPanel userProcessContainer;
-    Enterprise enterprise;
-    /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise) {
+    /**
+     * Creates new form CharityAdminWorkAreaJPanel
+     */
+    public CharityAdminWorkAreaJPanel() {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.enterprise = enterprise;
-        //valueLabel.setText(enterprise.getName());
     }
 
     /**
