@@ -25,7 +25,7 @@ public abstract class Organization {
     private static int counter;
     
     public enum Type{
-        Admin("Admin Organization");
+        FundManaging("FundManaging Organization"),CharityAdmin("CharityAdmin Organization");
         private String value;
         private Type(String value) {
             this.value = value;
