@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Wenqing
  */
 public class ManageEnterprisePanel extends javax.swing.JPanel {
-     private JPanel userProcessContainer;
+    private JPanel userProcessContainer;
     private EcoSystem system;
 
 

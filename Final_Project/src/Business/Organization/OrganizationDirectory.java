@@ -25,7 +25,14 @@ public class OrganizationDirectory {
     
     public Organization createOrganization(Organization.Type type){
         Organization organization = null;
-        //organization type
+        if (type.getValue().equals(Organization.Type.FundManaging.getValue())){
+            organization = new FundManagingOrganization();
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Organization.Type.CharityAdmin.getValue())){
+            organization = new CharityAdminOrganization();
+            organizationList.add(organization);
+        }
         return organization;
     }
     

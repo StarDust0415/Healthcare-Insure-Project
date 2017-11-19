@@ -21,7 +21,7 @@ public class CharityAdminRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel card, UserAccount account, Organization org, Enterprise ent, EcoSystem business) {
-        return new CharityAdminWorkAreaJPanel(card, account,(CharityAdminOrganization)org, ent);
+        return new CharityAdminWorkAreaJPanel(card, account,(CharityAdminOrganization)org, ent, business);
     }
     
 }

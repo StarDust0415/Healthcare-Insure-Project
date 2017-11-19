@@ -5,6 +5,8 @@
  */
 package Business.Organization;
 
+import Business.Role.CharityAdminRole;
+import Business.Role.FundManagerRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -14,12 +16,14 @@ import java.util.ArrayList;
  */
 public class CharityAdminOrganization extends Organization {
 
-    public CharityAdminOrganization(String name) {
-        super(name);
+    public CharityAdminOrganization() {
+        super(Organization.Type.CharityAdmin.getValue());
     }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return null;
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(new CharityAdminRole());
+        return roles;
     }    
 }

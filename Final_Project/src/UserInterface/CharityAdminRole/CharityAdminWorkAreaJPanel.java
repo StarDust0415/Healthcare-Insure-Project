@@ -5,23 +5,57 @@
  */
 package UserInterface.CharityAdminRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.CharityAdminOrganization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FundRequest;
+import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author tianchenglin
  */
 public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
+    private JPanel userProcessContainer;
+    private CharityAdminOrganization organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    private EcoSystem sys;
 
     /**
      * Creates new form CharityAdminWorkAreaJPanel
      */
    
-    public CharityAdminWorkAreaJPanel(JPanel card, UserAccount account, CharityAdminOrganization charityAdminOrganization, Enterprise ent) {
-       initComponents();
+    public CharityAdminWorkAreaJPanel(JPanel card, UserAccount account, CharityAdminOrganization charityAdminOrganization, Enterprise ent, EcoSystem business) {
+        initComponents();
+        this.userProcessContainer = card;
+        this.organization = charityAdminOrganization;
+        this.enterprise = ent;
+        this.userAccount = account;
+        this.sys = business;
+        NameTxt.setText(enterprise.getName());
+        populateRequestTable();
+    }
+    
+    public void populateRequestTable(){
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();        
+        model.setRowCount(0);
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[5];
+            row[0] = request.getRequestDate();
+            row[1] = ((FundRequest)request).getAmount();
+            row[2] = request.getStatus();
+            
+            String result = ((FundRequest) request).getResult();
+            row[3] = (result == null) ? "Waiting" : result;
+            row[4] = request.getSender();
+            
+            model.addRow(row);
+        }
     }
 
     /**
@@ -33,19 +67,89 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        SendBut = new javax.swing.JButton();
+        enterpriseLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        workRequestJTable = new javax.swing.JTable();
+        NameTxt = new javax.swing.JTextField();
+
+        SendBut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SendBut.setText("Send New Request");
+        SendBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SendButActionPerformed(evt);
+            }
+        });
+
+        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        enterpriseLabel.setText("EnterPrise :");
+
+        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Date", "Amount", "Status", "Result", "Sender Organization"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(workRequestJTable);
+
+        NameTxt.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(SendBut))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NameTxt))
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(SendBut, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void SendButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendButActionPerformed
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("RequestLabTestJPanel", new RequestFundPanel(userProcessContainer, organization, enterprise, sys));
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_SendButActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField NameTxt;
+    private javax.swing.JButton SendBut;
+    private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
 }

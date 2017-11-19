@@ -25,7 +25,8 @@ public abstract class Organization {
     private static int counter;
     
     public enum Type{
-        FundManaging("FundManaging Organization"),CharityAdmin("CharityAdmin Organization");
+        FundManaging("FundManaging Organization"),
+        CharityAdmin("CharityAdmin Organization");
         private String value;
         private Type(String value) {
             this.value = value;
@@ -68,11 +69,7 @@ public abstract class Organization {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setWorkQueue(WorkQueue workQueue) {
-        this.workQueue = workQueue;
-    }
+    }  
 
     @Override
     public String toString() {

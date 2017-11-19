@@ -5,6 +5,7 @@
  */
 package Business.Organization;
 
+import Business.Role.FundManagerRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -14,13 +15,15 @@ import java.util.ArrayList;
  */
 public class FundManagingOrganization extends Organization {
 
-    public FundManagingOrganization(String name) {
-        super(name);
+    public FundManagingOrganization() {
+        super(Organization.Type.FundManaging.getValue());
     }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return null;
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(new FundManagerRole());
+        return roles;
     }
     
 }
