@@ -92,18 +92,17 @@ public class RequestFundPanel extends javax.swing.JPanel {
                         .addGap(88, 88, 88)
                         .addComponent(requestTestJButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(messageJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(119, Short.MAX_VALUE))
+                        .addGap(176, 176, 176)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(147, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(messageJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,11 +111,11 @@ public class RequestFundPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NameTxt))
-                .addGap(96, 96, 96)
+                .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(messageJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(83, 83, 83)
+                .addGap(96, 96, 96)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backJButton)
                     .addComponent(requestTestJButton))
@@ -133,16 +132,20 @@ public class RequestFundPanel extends javax.swing.JPanel {
         request.setStatus("Sent");        
         
         organization.getWorkQueue().getWorkRequestList().add(request);
-        System.out.println(organization.getWorkQueue().getWorkRequestList());
+        //System.out.println(organization.getWorkQueue().getWorkRequestList());
 
         Organization receiverorg = null;
         for (Network n: sys.getNetworkList()){
+            //System.out.println("network name is:" + n.getName());
             for (Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
+                //System.out.println("ent name is:" + e.getName());
                 for (Organization o: e.getOrganizationDirectory().getOrganizationList()){
-                    if (organization instanceof FundManagingOrganization){
-                        receiverorg = organization;
-                        System.out.println(receiverorg);
-                        receiverorg.getWorkQueue().getWorkRequestList().add(request);
+                    //System.out.println("org name is:" + o.getName());
+                    if (o instanceof FundManagingOrganization){
+                        receiverorg = o;
+                        request.setReceiver(o);
+                        //System.out.println("receiving org is: " + o);
+                        receiverorg.getWorkQueue().addRequest(request);
                         break;
                     }                    
                 }

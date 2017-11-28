@@ -52,9 +52,7 @@ public class EcoSystem extends Organization {
 
         if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
             return false;
-        }
-
-       
+        } 
 
         return true;
     }

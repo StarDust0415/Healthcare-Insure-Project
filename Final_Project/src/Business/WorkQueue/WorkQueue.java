@@ -18,6 +18,10 @@ public class WorkQueue {
     public WorkQueue() {
         workRequestList = new ArrayList<>();
     }
+    
+    public void addRequest(WorkRequest r){
+        workRequestList.add(r);
+    }
 
     public ArrayList<WorkRequest> getWorkRequestList() {
         return workRequestList;

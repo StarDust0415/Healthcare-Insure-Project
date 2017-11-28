@@ -9,6 +9,7 @@ import Business.WorkQueue.WorkQueue;
 import Business.Empolyee.EmployeeDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
+import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 
 /**
@@ -66,6 +67,7 @@ public abstract class Organization {
     public WorkQueue getWorkQueue() {
         return workQueue;
     }
+    
 
     public void setName(String name) {
         this.name = name;

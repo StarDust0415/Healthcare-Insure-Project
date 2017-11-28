@@ -11,6 +11,7 @@ import Business.Organization.FundManagingOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.FundRequest;
 import Business.WorkQueue.WorkRequest;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,12 +26,13 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
     private FundManagingOrganization fundorganization;
     
    
-    public FundManagerWorkAreaJPanel(JPanel card, UserAccount account, FundManagingOrganization fundManagingOrganization, Enterprise ent) {
+    public FundManagerWorkAreaJPanel(JPanel card, UserAccount account, FundManagingOrganization org, Enterprise ent) {
         initComponents();        
         this.userProcessContainer = card;
         this.userAccount = account;
         this.ent = ent;
-        this.fundorganization = fundManagingOrganization;
+        this.fundorganization = org;
+        NameTxt.setText(org.getName());
         
         populateTable();
     }
@@ -39,15 +41,14 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();        
         model.setRowCount(0);
         
-        System.out.println(fundorganization.getWorkQueue().getWorkRequestList());
-        
-        for(WorkRequest request : fundorganization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
+        ArrayList<WorkRequest> list = fundorganization.getWorkQueue().getWorkRequestList();
+        for(WorkRequest request : list){
+            Object[] row = new Object[5];
             row[0] = request;
-            row[1] = request.getSender();
-            //row[2] = request.getReceiver() == null ? null : request.getReceiver();
-            row[2] = request.getReceiver();
-            row[3] = request.getStatus();
+            row[1] = request.getAmount();
+            row[2] = request.getSender();
+            row[3] = request.getReceiver();
+            row[4] = request.getStatus();
             
             model.addRow(row);
         }
@@ -64,19 +65,21 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
-        processJButton = new javax.swing.JButton();
+        processButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
+        NameTxt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Amount", "Sender", "Receiver", "Status"
+                "Request Date", "Amount", "Sender", "Receiver", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -85,10 +88,10 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
-        processJButton.setText("Process");
-        processJButton.addActionListener(new java.awt.event.ActionListener() {
+        processButton.setText("Process");
+        processButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                processJButtonActionPerformed(evt);
+                processButtonActionPerformed(evt);
             }
         });
 
@@ -99,44 +102,59 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        NameTxt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        NameTxt.setEnabled(false);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Enterprise:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
+                .addGap(126, 126, 126)
+                .addComponent(refreshJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(processButton)
+                .addGap(153, 153, 153))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(refreshJButton)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(65, 65, 65))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(processJButton)
-                            .addGap(232, 232, 232)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(refreshJButton)
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addComponent(processJButton)
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(processButton)
+                    .addComponent(refreshJButton))
                 .addGap(56, 56, 56))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
+    private void processButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processButtonActionPerformed
         int selectedRow = workRequestJTable.getSelectedRow();
         if (selectedRow < 0){
             return;
         }
-
         FundRequest request = (FundRequest)workRequestJTable.getValueAt(selectedRow, 0);
         request.setStatus("Processing");
-    }//GEN-LAST:event_processJButtonActionPerformed
+    }//GEN-LAST:event_processButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
         populateTable();
@@ -144,8 +162,10 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField NameTxt;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton processJButton;
+    private javax.swing.JButton processButton;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables

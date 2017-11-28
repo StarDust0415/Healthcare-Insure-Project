@@ -10,17 +10,9 @@ package Business.WorkQueue;
  * @author Wenqing
  */
 public class FundRequest extends WorkRequest{
-    private int amount;
     private String result;
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
+   
     public String getResult() {
         return result;
     }

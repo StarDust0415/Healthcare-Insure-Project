@@ -14,8 +14,7 @@ import java.util.Date;
  * @author tianchenglin
  */
 public abstract class WorkRequest {
-    
-    private String message;
+    private int amount;
     private Organization sender;
     private Organization receiver;
     private String status;
@@ -25,14 +24,15 @@ public abstract class WorkRequest {
     public WorkRequest(){
         requestDate = new Date();
     }
-
-    public String getMessage() {
-        return message;
+    
+     public int getAmount() {
+        return amount;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
+
 
     public Organization getSender() {
         return sender;
@@ -74,4 +74,7 @@ public abstract class WorkRequest {
         this.resolveDate = resolveDate;
     }
     
+    public String toString(){
+        return requestDate.toString();
+    }    
 }
