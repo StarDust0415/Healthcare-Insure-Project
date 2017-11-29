@@ -7,7 +7,9 @@ package UserInterface.CharityAdminRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.CharityAdminOrganization;
+import Business.Organization.Organization;
 import Business.Organization.PeopleManagingOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.FundRequest;
@@ -24,7 +26,6 @@ import javax.swing.table.DefaultTableModel;
 public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private CharityAdminOrganization organization;
-    private PeopleManagingOrganization peopleManagingOrganization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem sys;
@@ -34,7 +35,7 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
      */
    
 
-    public CharityAdminWorkAreaJPanel(JPanel card, UserAccount account, CharityAdminOrganization charityAdminOrganization, Enterprise ent, EcoSystem business, PeopleManagingOrganization peopleManagingOrganization) {
+    public CharityAdminWorkAreaJPanel(JPanel card, UserAccount account, CharityAdminOrganization charityAdminOrganization, Enterprise ent, EcoSystem business) {
 
         initComponents();
         this.userProcessContainer = card;
@@ -42,7 +43,6 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = ent;
         this.userAccount = account;
         this.sys = business;
-        this.peopleManagingOrganization = peopleManagingOrganization;
         NameTxt.setText(enterprise.getName());
         populateRequestTable();
         populatePeopleInfoTable();
@@ -51,7 +51,13 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
     public void populatePeopleInfoTable(){
         DefaultTableModel model = (DefaultTableModel)PeopleInfoTable.getModel();
         model.setRowCount(0);
-        for(WorkRequest request : peopleManagingOrganization.getWorkQueue().getWorkRequestList()){
+        
+        for(Network n: sys.getNetworkList()){
+            for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
+                for(Organization o: e.getOrganizationDirectory().getOrganizationList()){
+                    if(o instanceof PeopleManagingOrganization){
+                        System.out.print(o);
+                        for(WorkRequest request: o.getWorkQueue().getWorkRequestList()){
             Object[] row = new Object[5];
             row[0] = ((PeopleInfoRequest)request).getName();
             row[1] = ((PeopleInfoRequest)request).getAge();
@@ -60,19 +66,21 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
             row[4] = ((PeopleInfoRequest)request).getInsuranceType();
             
             model.addRow(row);
+                        }
+                    }
+                }
+            }
         }
-//        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
-//        
-//        model.setRowCount(0);
-//        
-//        for(WorkRequest request : labOrganization.getWorkQueue().getWorkRequestList()){
-//            Object[] row = new Object[4];
-//            row[0] = request;
-//            row[1] = request.getSender().getEmployee().getName();
-//            row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-//            row[3] = request.getStatus();
+//        for(WorkRequest request : peopleManagingOrganization.getWorkQueue().getWorkRequestList()){
+//            Object[] row = new Object[5];
+//            row[0] = ((PeopleInfoRequest)request).getName();
+//            row[1] = ((PeopleInfoRequest)request).getAge();
+//            row[2] = ((PeopleInfoRequest)request).getGender();
+//            row[3] = ((PeopleInfoRequest)request).getMedicalHistory();
+//            row[4] = ((PeopleInfoRequest)request).getInsuranceType();
 //            
 //            model.addRow(row);
+//        }
     }
     
     public void populateRequestTable(){
