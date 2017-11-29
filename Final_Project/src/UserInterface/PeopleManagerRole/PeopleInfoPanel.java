@@ -7,8 +7,11 @@ package UserInterface.PeopleManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.PeopleManagingOrganization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.PeopleInfoRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
@@ -23,17 +26,19 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private Organization organization;
     private EcoSystem sys;
+    private UserAccount userAccount;
 
     /**
      * Creates new form PeopleInfoPanel
      */
 
-    PeopleInfoPanel(JPanel userProcessContainer, PeopleManagingOrganization organization, Enterprise enterprise, EcoSystem sys) {
+    PeopleInfoPanel(JPanel userProcessContainer, PeopleManagingOrganization organization, Enterprise enterprise, EcoSystem sys, UserAccount account) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.organization = organization;
         this.sys = sys;
+        this.userAccount = account;
     }
 
     /**
@@ -75,6 +80,11 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton1.setText("Submit& Request");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         backJButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         backJButton.setText("<<Back");
@@ -149,9 +159,41 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         PeopleManagerRoleWorkAreaJPanel dwjp = (PeopleManagerRoleWorkAreaJPanel) component;
+        dwjp.populatePeopleInfoTable();
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String name = txtName.getText();
+        int age = Integer.parseInt(txtAge.getText());
+        String gender = txtGender.getText();
+        String medicalHistory = txtMedicalHistory.getText();
+        String insuranceType = txtInsuranceType.getText();
+        
+        PeopleInfoRequest request = new PeopleInfoRequest();
+        request.setName(name);
+        request.setAge(age);
+        request.setGender(gender);
+        request.setInsuranceType(insuranceType);
+        request.setMedicalHistory(medicalHistory);
+        request.setSender(organization);
+        
+        //organization.getWorkQueue().getWorkRequestList().add(request);
+        System.out.println(organization.getWorkQueue().getWorkRequestList());
+        
+        Organization org = null;
+        for(Organization organization: enterprise.getOrganizationDirectory().getOrganizationList()){
+            if(organization instanceof PeopleManagingOrganization){
+                org = organization;
+                break;
+            }
+        }
+        if(org !=null){
+            org.getWorkQueue().getWorkRequestList().add(request);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

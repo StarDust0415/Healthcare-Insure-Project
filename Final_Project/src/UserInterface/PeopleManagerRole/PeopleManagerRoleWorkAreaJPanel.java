@@ -9,8 +9,11 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.PeopleManagingOrganization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.PeopleInfoRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +25,9 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem sys;
+    private UserAccount account;
+    
+    
 
     /**
      * Creates new form PeopleManagerRoleWorkAreaJPanel
@@ -34,8 +40,26 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.sys = business;
+        this.account = account;
         
         NameTxt.setText(enterprise.getName());
+        populatePeopleInfoTable();
+    }
+    
+    public void populatePeopleInfoTable(){
+        DefaultTableModel model = (DefaultTableModel) PeopleInfoTable.getModel();
+        model.setRowCount(0);
+        
+        for(WorkRequest request: organization.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[5];
+            row[0] = ((PeopleInfoRequest)request).getName();
+            row[1] = ((PeopleInfoRequest)request).getAge();
+            row[2] = ((PeopleInfoRequest)request).getGender();
+            row[3] = ((PeopleInfoRequest)request).getMedicalHistory();
+            row[4] = ((PeopleInfoRequest)request).getInsuranceType();
+            
+            model.addRow(row);
+        }
     }
 
     /**
@@ -131,7 +155,7 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestLabTestJPanel", new PeopleInfoPanel(userProcessContainer, organization, enterprise, sys));
+        userProcessContainer.add("RequestLabTestJPanel", new PeopleInfoPanel(userProcessContainer, organization, enterprise, sys,account));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAddActionPerformed
 
