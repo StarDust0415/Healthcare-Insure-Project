@@ -19,7 +19,8 @@ public abstract class Role {
     
     public enum RoleType{
         CharityAdmin("CharityAdmin"),
-        FundManager("FundManager");
+        FundManager("FundManager"),
+        PeopleManager("PeopleManager");
         
         private String value;
         private RoleType(String value){

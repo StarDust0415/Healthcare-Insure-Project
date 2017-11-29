@@ -26,6 +26,7 @@ public abstract class Organization {
     
     public enum Type{
         FundManaging("FundManaging Organization"),
+        PeopleManaging("PeopleManaging Organization"),
         CharityAdmin("CharityAdmin Organization");
         private String value;
         private Type(String value) {

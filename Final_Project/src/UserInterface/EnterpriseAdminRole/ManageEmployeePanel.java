@@ -197,6 +197,9 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         String name = nameJTextField.getText();
 
         organization.getEmployeeDirectory().createEmployee(name);
+        
+        populateTable(organization);
+        
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed
