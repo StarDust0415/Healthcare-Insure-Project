@@ -152,6 +152,7 @@ System.out.println( organization.getName());
         Component component = componentArray[componentArray.length - 1];
         PeopleManagerRoleWorkAreaJPanel dwjp = (PeopleManagerRoleWorkAreaJPanel) component;
         dwjp.populatePeopleInfoTable();
+        dwjp.populateHomelessTable();
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed

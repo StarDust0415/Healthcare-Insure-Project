@@ -56,15 +56,15 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel) HomelessTable.getModel();
         dtm.setRowCount(0);
         
-//        for(HomelessPeople people: organization.getHpd().getList()){
-//            Object[] row = new Object[5];
-//            row[0] = people;
-//            row[1] = people.getAge();
-//            row[2] = people.getGender();
-//            row[3] = people.getMedicalHistory();
-//            
-//            dtm.addRow(row);
-//        }
+        for(HomelessPeople people: organization.getHpd().getPeoplelist()){
+            Object[] row = new Object[5];
+            row[0] = people;
+            row[1] = people.getAge();
+            row[2] = people.getGender();
+            row[3] = people.getMedicalHistory();
+            
+            dtm.addRow(row);
+        }
        
     }
     
