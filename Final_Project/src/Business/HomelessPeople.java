@@ -47,6 +47,11 @@ public class HomelessPeople {
         this.medicalHistory = medicalHistory;
     }
     
+@Override
+    public String toString(){
+    return name;
+}
+    
     
     
     
