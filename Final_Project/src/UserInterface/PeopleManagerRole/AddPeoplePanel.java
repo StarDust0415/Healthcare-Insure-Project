@@ -159,7 +159,9 @@ System.out.println( organization.getName());
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         HomelessPeopleDirectory hpd = organization.getHpd();
+        System.out.println("AddPeoplePanel: " + hpd);
         HomelessPeople people = organization.getHpd().addPeople();
+        
         
         String name = txtName.getText();
         int age = Integer.parseInt(txtAge.getText());
