@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  *
  * @author Wenqing
  */
-public class RequestFundPanel extends javax.swing.JPanel {
+public class SendFundRequestPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Enterprise enterprise;
     private Organization organization;
@@ -29,7 +29,7 @@ public class RequestFundPanel extends javax.swing.JPanel {
     /**
      * Creates new form RequestFundPanel
      */
-    public RequestFundPanel(JPanel userProcessContainer, Organization organization, Enterprise enterprise, EcoSystem system) {
+    public SendFundRequestPanel(JPanel userProcessContainer, Organization organization, Enterprise enterprise, EcoSystem system) {
         initComponents();        
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
@@ -158,7 +158,7 @@ public class RequestFundPanel extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        CharityAdminWorkAreaJPanel dwjp = (CharityAdminWorkAreaJPanel) component;
+        RequestFundingPanel dwjp = (RequestFundingPanel) component;
         dwjp.populateRequestTable();
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
