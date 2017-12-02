@@ -5,10 +5,18 @@
  */
 package Business.Organization;
 
+import Business.Role.OrderManagerRole;
+import Business.Role.Role;
+
+
 /**
  *
  * @author yizheliu
  */
-public class OrderManageOrganization {
+public class OrderManagingOrganization extends Organization{
+    
+    public OrderManagingOrganization(){
+        super(Organization.Type.OrderManaging.)
+    }
     
 }
