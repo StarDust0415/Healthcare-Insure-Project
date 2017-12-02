@@ -8,6 +8,7 @@ package UserInterface.FundManagerRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.FundManagingOrganization;
+import Business.Organization.InsuranceManagingOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.FundRequest;
 import Business.WorkQueue.WorkRequest;
@@ -34,7 +35,7 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
         
         populateTable();
     }
-    
+   
     public void populateTable(){
         DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();        
         model.setRowCount(0);

@@ -12,19 +12,25 @@ import java.util.ArrayList;
  * @author Wenqing
  */
 public class HomelessPeopleDirectory {
-    private ArrayList<HomelessPeople> list;
+    private ArrayList<HomelessPeople> peoplelist;
     
     public HomelessPeopleDirectory(){
-        this.list = new ArrayList<>();
-    }
-    
-    
-    public void addPeople(HomelessPeople people){
-        this.list.add(people);
+        peoplelist = new ArrayList();
     }
 
-    public ArrayList<HomelessPeople> getList() {
-        return list;
+    public ArrayList<HomelessPeople> getPeoplelist() {
+        return peoplelist;
+    }
+    
+    
+    public HomelessPeople addPeople(){
+        HomelessPeople homelessPeople = new HomelessPeople();
+        peoplelist.add(homelessPeople);
+        return homelessPeople;
+    }
+    
+    public void deleteHomelessPeople(HomelessPeople homelessPeople){
+        peoplelist.remove(homelessPeople);
     }
    
 }

@@ -7,6 +7,8 @@ package UserInterface.PeopleManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.HomelessPeople;
+import Business.HomelessPeopleDirectory;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.PeopleManagingOrganization;
@@ -24,9 +26,10 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
     
     private JPanel userProcessContainer;
     private Enterprise enterprise;
-    private Organization organization;
+    private PeopleManagingOrganization organization;
     private EcoSystem sys;
     private UserAccount userAccount;
+    private HomelessPeopleDirectory hpd;
 
     /**
      * Creates new form PeopleInfoPanel
@@ -39,6 +42,11 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.sys = sys;
         this.userAccount = account;
+        this.hpd = organization.getHpd();
+        
+        for(HomelessPeople people: hpd.getPeoplelist()){
+            comboPeople.addItem(people.toString());
+        }
     }
 
     /**
@@ -50,30 +58,12 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        txtAge = new javax.swing.JTextField();
-        txtGender = new javax.swing.JTextField();
-        txtMedicalHistory = new javax.swing.JTextField();
         txtInsuranceType = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
-
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel1.setText("Name:");
-
-        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel2.setText("Age:");
-
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel3.setText("Gender:");
-
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel4.setText("Medical History:");
+        comboPeople = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Insurance Type:");
@@ -94,6 +84,9 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel6.setText("Choose a Homeless People:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,55 +95,35 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
                 .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMedicalHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel5)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtInsuranceType, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(291, Short.MAX_VALUE))
+                            .addComponent(txtInsuranceType, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backJButton)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtMedicalHistory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboPeople, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtInsuranceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -166,22 +139,23 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String name = txtName.getText();
-        int age = Integer.parseInt(txtAge.getText());
-        String gender = txtGender.getText();
-        String medicalHistory = txtMedicalHistory.getText();
-        String insuranceType = txtInsuranceType.getText();
-        
-        PeopleInfoRequest request = new PeopleInfoRequest();
-        request.setName(name);
-        request.setAge(age);
-        request.setGender(gender);
-        request.setInsuranceType(insuranceType);
-        request.setMedicalHistory(medicalHistory);
-        request.setSender(organization);
-        
-        //organization.getWorkQueue().getWorkRequestList().add(request);
-        System.out.println(organization.getWorkQueue().getWorkRequestList());
+        int idx = comboPeople.getSelectedIndex();
+        if (idx>=0){
+            HomelessPeople p = organization.getHpd().getPeoplelist().get(idx);
+            //String name = (String)comboPeople.getSelectedItem();
+            
+            PeopleInfoRequest request = new PeopleInfoRequest();
+            
+            request.setName(p.getName());
+            request.setAge(p.getAge());
+            request.setGender(p.getGender());
+            request.setMedicalHistory(p.getMedicalHistory());
+            
+            String insuranceType = txtInsuranceType.getText();
+            
+            request.setInsuranceType(insuranceType);
+            
+                    System.out.println(organization.getWorkQueue().getWorkRequestList());
         
         Organization org = null;
         for(Organization organization: enterprise.getOrganizationDirectory().getOrganizationList()){
@@ -193,21 +167,37 @@ public class PeopleInfoPanel extends javax.swing.JPanel {
         if(org !=null){
             org.getWorkQueue().getWorkRequestList().add(request);
         }
+            
+        }
+        
+        
+        
+//        String name = txtName.getText();
+//        int age = Integer.parseInt(txtAge.getText());
+//        String gender = txtGender.getText();
+//        String medicalHistory = txtMedicalHistory.getText();
+//        String insuranceType = txtInsuranceType.getText();
+//        
+//        PeopleInfoRequest request = new PeopleInfoRequest();
+//        request.setName(name);
+//        request.setAge(age);
+//        request.setGender(gender);
+//        request.setInsuranceType(insuranceType);
+//        request.setMedicalHistory(medicalHistory);
+//        request.setSender(organization);
+        
+        //organization.getWorkQueue().getWorkRequestList().add(request);
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
+    private javax.swing.JComboBox<String> comboPeople;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField txtAge;
-    private javax.swing.JTextField txtGender;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField txtInsuranceType;
-    private javax.swing.JTextField txtMedicalHistory;
-    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

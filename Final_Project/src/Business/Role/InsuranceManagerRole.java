@@ -7,19 +7,21 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Organization.InsuranceManagingOrganization;
 import Business.Organization.Organization;
-import Business.Organization.OrderManagingOrganization;
 import Business.UserAccount.UserAccount;
-import UserInterface.PeopleManagerRole.PeopleManagerRoleWorkAreaJPanel;
+import UserInterface.InsuranceManagerRole.InsuranceManagerWorkAreaPanel;
 import javax.swing.JPanel;
 
 /**
  *
- * @author yizheliu
+ * @author Wenqing
  */
-public class OrderManagerRole extends Role {
+public class InsuranceManagerRole extends Role {
+
     @Override
     public JPanel createWorkArea(JPanel card, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new PeopleManagerRoleWorkAreaJPanel(card,account,(PeopleManagingOrganization)organization,enterprise,business);
+        return new InsuranceManagerWorkAreaPanel(card, account,(InsuranceManagingOrganization)organization, enterprise,business);
     }
+    
 }
