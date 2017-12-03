@@ -7,6 +7,8 @@ package UserInterface.CharityAdminRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.HomelessPeople;
+import Business.InsuranceQuote;
 import Business.Organization.CharityAdminOrganization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -29,12 +31,21 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
    
     public RequestInsuranceQuotePanel(JPanel card, UserAccount userAccount, CharityAdminOrganization organization, Enterprise enterprise, EcoSystem sys) {
         initComponents();
-        initComponents();
         this.userProcessContainer = card;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = userAccount;
         this.sys = sys;
+        populateCombo();
+    }
+    private void populateCombo(){
+        for(InsuranceQuote.AgeType type: InsuranceQuote.AgeType.values()){
+            TypeCombo.addItem(type);
+        }
+        
+        for(HomelessPeople people: sys.getHpd().getPeoplelist()){
+            peopleCombo.addItem(people);
+        }  
     }
 
     /**
@@ -47,17 +58,17 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        RequestTable = new javax.swing.JTable();
         FundRequestBut = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        SendBut = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        peopleCombo = new javax.swing.JComboBox();
+        TypeCombo = new javax.swing.JComboBox();
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        RequestTable.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        RequestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -65,7 +76,7 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
                 "Date", "People", "Type", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(RequestTable);
 
         FundRequestBut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         FundRequestBut.setText("Request Funding");
@@ -79,7 +90,12 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
 
         jLabel2.setText("Insurance Type:");
 
-        jButton1.setText("Send New Request");
+        SendBut.setText("Send New Request");
+        SendBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SendButActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Requests Sent:");
 
@@ -88,15 +104,10 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addContainerGap(111, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SendBut, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
                         .addComponent(FundRequestBut, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(89, 89, 89))
@@ -106,29 +117,35 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
                             .addComponent(jLabel1))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(peopleCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(143, 143, 143))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(peopleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FundRequestBut)
-                    .addComponent(jButton1))
+                    .addComponent(SendBut))
                 .addGap(49, 49, 49))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -139,16 +156,20 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_FundRequestButActionPerformed
 
+    private void SendButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendButActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SendButActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FundRequestBut;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JTable RequestTable;
+    private javax.swing.JButton SendBut;
+    private javax.swing.JComboBox TypeCombo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox peopleCombo;
     // End of variables declaration//GEN-END:variables
 }

@@ -41,7 +41,7 @@ public class PeopleInfoRequestPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.sys = sys;
         this.userAccount = account;
-        this.hpd = organization.getHpd();        
+        this.hpd = sys.getHpd();        
         populateCombo();
     }
     

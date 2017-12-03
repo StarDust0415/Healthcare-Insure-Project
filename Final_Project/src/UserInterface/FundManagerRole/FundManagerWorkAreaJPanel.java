@@ -43,11 +43,12 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
         System.out.println(fundorganization.getWorkQueue().getWorkRequestList());
         
         for(WorkRequest request : fundorganization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
-            row[0] = request;
+            Object[] row = new Object[5];
+            row[0] = request.getAmount();
             row[1] = request.getSender();
             row[2] = request.getReceiver();
             row[3] = request.getStatus();
+            row[4] = request;
             
             model.addRow(row);
         }
@@ -73,17 +74,9 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Amount", "Sender", "Receiver", "Status"
+                "Amount", "Sender", "Receiver", "Status", "Request Date"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(workRequestJTable);
 
         processJButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -109,11 +102,11 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(refreshJButton)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(65, 65, 65)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(refreshJButton)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(65, 65, 65))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(processJButton)
                         .addGap(243, 243, 243))))
@@ -137,7 +130,7 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
 
-        FundRequest request = (FundRequest)workRequestJTable.getValueAt(selectedRow, 0);
+        FundRequest request = (FundRequest)workRequestJTable.getValueAt(selectedRow, 4);
         request.setStatus("Processing");
     }//GEN-LAST:event_processJButtonActionPerformed
 

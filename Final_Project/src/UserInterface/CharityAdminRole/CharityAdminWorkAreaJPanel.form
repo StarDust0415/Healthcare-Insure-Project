@@ -118,7 +118,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Homeless People Directory:"/>
+        <Property name="text" type="java.lang.String" value="Homeless People Request Directory:"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -15,23 +15,12 @@ import java.util.ArrayList;
  * @author tianchenglin
  */
 public class PeopleManagingOrganization extends Organization {
-
-    private HomelessPeopleDirectory hpd;
+    
     
     public PeopleManagingOrganization() {
         super(Organization.Type.PeopleManaging.getValue());
-        this.hpd = new HomelessPeopleDirectory();
+        
     }
-
-    public HomelessPeopleDirectory getHpd() {
-        return hpd;
-    }
-
-    public void setHpd(HomelessPeopleDirectory hpd) {
-        this.hpd = hpd;
-    }
-
-  
     
 
     @Override

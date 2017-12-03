@@ -120,7 +120,7 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Homeless People Directory:");
+        jLabel1.setText("Homeless People Request Directory:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

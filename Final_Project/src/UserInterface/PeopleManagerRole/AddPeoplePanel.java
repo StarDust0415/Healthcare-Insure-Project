@@ -39,8 +39,7 @@ public class AddPeoplePanel extends javax.swing.JPanel {
         this.sys = sys;
         this.userAccount = account;
        
-        this.hpd = organization.getHpd();
-System.out.println( organization.getName());
+        this.hpd = sys.getHpd();
        
 //System.out.println(hpd.getClass().getSimpleName());
     }
@@ -162,9 +161,8 @@ System.out.println( organization.getName());
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        HomelessPeopleDirectory hpd = organization.getHpd();
-        System.out.println("AddPeoplePanel: " + hpd);
-        HomelessPeople people = organization.getHpd().addPeople();
+        HomelessPeopleDirectory hpd = sys.getHpd();
+        HomelessPeople people = sys.getHpd().addPeople();
         
         
         String name = txtName.getText();

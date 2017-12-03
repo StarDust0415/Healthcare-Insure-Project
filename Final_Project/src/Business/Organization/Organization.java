@@ -7,6 +7,7 @@ package Business.Organization;
 
 import Business.WorkQueue.WorkQueue;
 import Business.Empolyee.EmployeeDirectory;
+import Business.HomelessPeopleDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public abstract class Organization {
     private UserAccountDirectory userAccountDirectory;
     private int organizationID;
     private static int counter;
+    private HomelessPeopleDirectory hpd;
     
     public enum Type{
         FundManaging("FundManaging Organization"),
@@ -40,11 +42,20 @@ public abstract class Organization {
 
     public Organization(String name) {
         this.name = name;
+        this.hpd = new HomelessPeopleDirectory();
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
         userAccountDirectory = new UserAccountDirectory();
         organizationID = counter;
         ++counter;
+    }
+    
+    public HomelessPeopleDirectory getHpd() {
+        return hpd;
+    }
+
+    public void setHpd(HomelessPeopleDirectory hpd) {
+        this.hpd = hpd;
     }
 
     public abstract ArrayList<Role> getSupportedRole();
