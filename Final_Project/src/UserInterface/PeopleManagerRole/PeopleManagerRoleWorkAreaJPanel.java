@@ -43,12 +43,8 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
         this.sys = business;
         this.account = account;
         
-        
-       
-        
-        
         NameTxt.setText(enterprise.getName());
-        populatePeopleInfoTable();
+        populateRequestTable();
         populateHomelessTable();
     }
     
@@ -68,16 +64,16 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
        
     }
     
-    public void populatePeopleInfoTable(){
-        DefaultTableModel model = (DefaultTableModel) PeopleInfoTable.getModel();
+    public void populateRequestTable(){
+        DefaultTableModel model = (DefaultTableModel) requestTable.getModel();
         model.setRowCount(0);
         
         for(WorkRequest request: organization.getWorkQueue().getWorkRequestList()){
             Object[] row = new Object[5];
-            row[0] = ((PeopleInfoRequest)request).getName();
-            row[1] = ((PeopleInfoRequest)request).getAge();
-            row[2] = ((PeopleInfoRequest)request).getGender();
-            row[3] = ((PeopleInfoRequest)request).getMedicalHistory();
+            row[0] = ((PeopleInfoRequest)request).getPeople();
+            row[1] = ((PeopleInfoRequest)request).getPeople().getAge();
+            row[2] = ((PeopleInfoRequest)request).getPeople().getGender();
+            row[3] = ((PeopleInfoRequest)request).getPeople().getMedicalHistory();
             row[4] = ((PeopleInfoRequest)request).getInsuranceType();
             
             model.addRow(row);
@@ -96,7 +92,7 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         NameTxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        PeopleInfoTable = new javax.swing.JTable();
+        requestTable = new javax.swing.JTable();
         btnView = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
@@ -111,7 +107,7 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
 
         NameTxt.setEnabled(false);
 
-        PeopleInfoTable.setModel(new javax.swing.table.DefaultTableModel(
+        requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -119,7 +115,7 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
                 "Name", "Age", "Gender", "Medical History", "Insurance Type"
             }
         ));
-        jScrollPane1.setViewportView(PeopleInfoTable);
+        jScrollPane1.setViewportView(requestTable);
 
         btnView.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnView.setText("View Details & Update");
@@ -176,15 +172,20 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel2))
+                        .addGap(0, 466, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +216,7 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestLabTestJPanel", new PeopleInfoPanel(userProcessContainer, organization, enterprise, sys,account));
+        userProcessContainer.add("PeopleInforRequestPanel", new PeopleInfoRequestPanel(userProcessContainer, organization, enterprise, sys,account));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnRequestActionPerformed
 
@@ -230,7 +231,6 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable HomelessTable;
     private javax.swing.JTextField NameTxt;
-    private javax.swing.JTable PeopleInfoTable;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnRequest;
@@ -240,5 +240,6 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable requestTable;
     // End of variables declaration//GEN-END:variables
 }

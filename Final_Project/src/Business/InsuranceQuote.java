@@ -15,16 +15,20 @@ public class InsuranceQuote {
     private String provider;
     
     public enum AgeType{
-        Youth (25),
-        MiddleAged (45),
-        Old(100);
+        Youth ("Youth: 0-25"),
+        MiddleAged ("Middle Aged: 25-50"),
+        Old("Over 50");
         
-        private int age;
-        private AgeType(int age){
+        private String age;
+        private AgeType(String age){
             this.age = age;
         }
-        public int getAge(){
+        public String getAge(){
             return this.age;
+        }
+        
+        public String toString(){
+            return age;
         }
     }
 

@@ -57,14 +57,14 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
                     if(o instanceof PeopleManagingOrganization){
                         System.out.print(o);
                         for(WorkRequest request: o.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[5];
-            row[0] = ((PeopleInfoRequest)request).getName();
-            row[1] = ((PeopleInfoRequest)request).getAge();
-            row[2] = ((PeopleInfoRequest)request).getGender();
-            row[3] = ((PeopleInfoRequest)request).getMedicalHistory();
-            row[4] = ((PeopleInfoRequest)request).getInsuranceType();
-            
-            model.addRow(row);
+                            Object[] row = new Object[5];
+                            row[0] = ((PeopleInfoRequest)request).getPeople();
+                            row[1] = ((PeopleInfoRequest)request).getAge();
+                            row[2] = ((PeopleInfoRequest)request).getGender();
+                            row[3] = ((PeopleInfoRequest)request).getMedicalHistory();
+                            row[4] = ((PeopleInfoRequest)request).getInsuranceType();
+
+                            model.addRow(row);
                         }
                     }
                 }
@@ -143,15 +143,15 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(QuoteRequestBut)
-                                .addGap(100, 100, 100)
-                                .addComponent(FundRequestBut, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(127, 127, 127)
                                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addComponent(QuoteRequestBut)
+                                .addGap(67, 67, 67)
+                                .addComponent(FundRequestBut, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -169,8 +169,8 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(QuoteRequestBut)
                     .addComponent(FundRequestBut))

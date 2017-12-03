@@ -22,6 +22,5 @@ public class PeopleManagerRole extends Role {
     @Override
     public JPanel createWorkArea(JPanel card, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         return new PeopleManagerRoleWorkAreaJPanel(card,account,(PeopleManagingOrganization)organization,enterprise,business);
-    }
-    
+    }    
 }

@@ -5,48 +5,44 @@
  */
 package Business.WorkQueue;
 
+import Business.HomelessPeople;
 /**
  *
  * @author tianchenglin
  */
 public class PeopleInfoRequest extends WorkRequest {
-    private String name;
-    private int age;
-    private String gender;
-    private String medicalHistory;
+//    private String name;
+//    private int age;
+//    private String gender;
+//    private String medicalHistory;
+    private HomelessPeople people;
     private String insuranceType;
 
-    public String getName() {
-        return name;
+    public HomelessPeople getPeople() {
+        return people;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPeople(HomelessPeople people) {
+        this.people = people;
+    }
+    
+    public String getName(){
+        return people.getName();
+    }
+    
+    public int getAge(){
+        return people.getAge();
+    }
+    
+    public String getGender(){
+        return people.getGender();
+    }
+    
+    public String getMedicalHistory(){
+        return people.getMedicalHistory();
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getMedicalHistory() {
-        return medicalHistory;
-    }
-
-    public void setMedicalHistory(String medicalHistory) {
-        this.medicalHistory = medicalHistory;
-    }
+    
 
     public String getInsuranceType() {
         return insuranceType;
@@ -54,7 +50,5 @@ public class PeopleInfoRequest extends WorkRequest {
 
     public void setInsuranceType(String insuranceType) {
         this.insuranceType = insuranceType;
-    }
-    
-    
+    }    
 }
