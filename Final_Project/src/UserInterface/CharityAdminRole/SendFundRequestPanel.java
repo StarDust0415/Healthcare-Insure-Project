@@ -139,8 +139,9 @@ public class SendFundRequestPanel extends javax.swing.JPanel {
         for (Network n: sys.getNetworkList()){
             for (Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
                 for (Organization o: e.getOrganizationDirectory().getOrganizationList()){
-                    if (organization instanceof FundManagingOrganization){
-                        receiverorg = organization;
+                    if (o instanceof FundManagingOrganization){
+                        receiverorg = o;
+                        request.setReceiver(o);
                         System.out.println(receiverorg);
                         receiverorg.getWorkQueue().getWorkRequestList().add(request);
                         break;

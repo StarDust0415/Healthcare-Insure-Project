@@ -46,7 +46,6 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
             Object[] row = new Object[4];
             row[0] = request;
             row[1] = request.getSender();
-            //row[2] = request.getReceiver() == null ? null : request.getReceiver();
             row[2] = request.getReceiver();
             row[3] = request.getStatus();
             
