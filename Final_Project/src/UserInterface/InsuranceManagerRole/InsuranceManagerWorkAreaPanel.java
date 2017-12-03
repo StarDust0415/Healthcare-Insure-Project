@@ -7,12 +7,15 @@ package UserInterface.InsuranceManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.InsuranceQuote;
 import Business.Organization.InsuranceManagingOrganization;
 import Business.Organization.Organization;
+import Business.QuoteCatalogue;
 import Business.UserAccount.UserAccount;
 import UserInterface.CharityAdminRole.RequestFundingPanel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,11 +34,32 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
 
     public InsuranceManagerWorkAreaPanel(JPanel card, UserAccount account, InsuranceManagingOrganization org, Enterprise enterprise, EcoSystem business) {
         initComponents();
-         this.userProcessContainer = card;
+        this.userProcessContainer = card;
         this.organization = org;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.sys = business;
+        populateQuoteTable();
+        populateRequestTable();
+    }
+    
+    public void populateQuoteTable(){
+        DefaultTableModel model = (DefaultTableModel)QuoteTable.getModel();
+        model.setRowCount(0);
+        
+        QuoteCatalogue qc = organization.getQc();
+        for(InsuranceQuote quote: qc.getList()){
+            Object[] row = new Object[4];
+            row[0] = quote.getProvider();
+            row[1] = quote.getTotalPremium();
+            row[2] = quote.getPrice();
+            row[3] = quote.getAge();
+
+            model.addRow(row);            
+        }
+    }
+    private void populateRequestTable(){
+        
     }
 
     /**
@@ -48,16 +72,16 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        QuoteTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        RequestTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         AddBut = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         ProcessBut = new javax.swing.JButton();
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        QuoteTable.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        QuoteTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -65,9 +89,9 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
                 "Provider", "Total Premium", "Price", "Age Type"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(QuoteTable);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        RequestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -75,7 +99,7 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
                 "Date", "People", "Type", "Status"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(RequestTable);
 
         jLabel1.setText("Insurance Quotes:");
 
@@ -99,8 +123,8 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(75, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ProcessBut)
                     .addComponent(jLabel2)
@@ -108,7 +132,7 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,13 +143,13 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(AddBut)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ProcessBut)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -144,11 +168,11 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddBut;
     private javax.swing.JButton ProcessBut;
+    private javax.swing.JTable QuoteTable;
+    private javax.swing.JTable RequestTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

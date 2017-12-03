@@ -7,8 +7,13 @@ package UserInterface.InsuranceManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.InsuranceQuote;
+import Business.InsuranceQuote.AgeType;
 import Business.Organization.InsuranceManagingOrganization;
 import Business.UserAccount.UserAccount;
+import UserInterface.PeopleManagerRole.PeopleManagerRoleWorkAreaJPanel;
+import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JPanel;
 
 /**
@@ -16,14 +21,38 @@ import javax.swing.JPanel;
  * @author Wenqing
  */
 public class AddQuotePanel extends javax.swing.JPanel {
+    private JPanel userProcessContainer;
+    private InsuranceManagingOrganization organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    private EcoSystem sys;
 
     /**
      * Creates new form AddQuotePanel
      */
     
 
-    public AddQuotePanel(JPanel userProcessContainer, UserAccount userAccount, InsuranceManagingOrganization organization, Enterprise enterprise, EcoSystem sys) {
-         initComponents();
+    public AddQuotePanel(JPanel card, UserAccount account, InsuranceManagingOrganization org, Enterprise enterprise, EcoSystem sys) {
+        initComponents();
+        this.userProcessContainer = card;
+        this.organization = org;
+        this.enterprise = enterprise;
+        this.userAccount = account;
+        this.sys = sys;
+        populateCombos();
+    }
+    
+    private void populateCombos(){
+        String s1 = "provider1";
+        String s2 = "provider2";
+        String s3 = "provider3";
+        InsuranceCombo.addItem(s1);
+        InsuranceCombo.addItem(s2);
+        InsuranceCombo.addItem(s3);
+        
+        for(AgeType type: AgeType.values()){
+            AgeCombo.addItem(type);
+        }
     }
 
     /**
@@ -35,19 +64,141 @@ public class AddQuotePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        AddBut = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        AgeCombo = new javax.swing.JComboBox();
+        InsuranceCombo = new javax.swing.JComboBox();
+        PremiumTxt = new javax.swing.JTextField();
+        PriceTxt = new javax.swing.JTextField();
+        BackBut = new javax.swing.JButton();
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Insurance Provider:");
+
+        AddBut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        AddBut.setText("Add Quote");
+        AddBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Total Premium:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Price:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("Age Type:");
+
+        AgeCombo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        InsuranceCombo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        PremiumTxt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        PriceTxt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        BackBut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        BackBut.setText("<<Back");
+        BackBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackButActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(AddBut)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(PriceTxt)
+                            .addComponent(PremiumTxt)
+                            .addComponent(InsuranceCombo, 0, 179, Short.MAX_VALUE)
+                            .addComponent(AgeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(148, 148, 148))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(BackBut, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(152, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(InsuranceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(PremiumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(PriceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(AgeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddBut)
+                    .addComponent(BackBut))
+                .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AddButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButActionPerformed
+    InsuranceQuote quote = organization.getQc().addQuote();
+    String provider =(String) InsuranceCombo.getSelectedItem();
+    int premium = Integer.parseInt((String)PremiumTxt.getText());
+    int price = Integer.parseInt((String)PriceTxt.getText());
+    AgeType type =(AgeType) AgeCombo.getSelectedItem();
+    
+    quote.setProvider(provider);
+    quote.setAge(type);
+    quote.setPrice(price);
+    quote.setTotalPremium(premium);
+    
+    }//GEN-LAST:event_AddButActionPerformed
+
+    private void BackButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButActionPerformed
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        InsuranceManagerWorkAreaPanel dwjp = (InsuranceManagerWorkAreaPanel) component;
+        dwjp.populateQuoteTable();
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_BackButActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddBut;
+    private javax.swing.JComboBox AgeCombo;
+    private javax.swing.JButton BackBut;
+    private javax.swing.JComboBox InsuranceCombo;
+    private javax.swing.JTextField PremiumTxt;
+    private javax.swing.JTextField PriceTxt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

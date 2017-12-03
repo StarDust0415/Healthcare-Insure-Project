@@ -13,6 +13,7 @@ public class InsuranceQuote {
     private int totalPremium;
     private int price;
     private String provider;
+    private AgeType age;
     
     
     public enum AgeType{
@@ -35,6 +36,14 @@ public class InsuranceQuote {
 
     public int getTotalPremium() {
         return totalPremium;
+    }
+
+    public AgeType getAge() {
+        return age;
+    }
+
+    public void setAge(AgeType age) {
+        this.age = age;
     }
 
     public void setTotalPremium(int totalPremium) {

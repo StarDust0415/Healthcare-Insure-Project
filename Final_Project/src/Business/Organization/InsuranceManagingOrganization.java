@@ -5,6 +5,7 @@
  */
 package Business.Organization;
 
+import Business.QuoteCatalogue;
 import Business.Role.InsuranceManagerRole;
 import Business.Role.Role;
 import java.util.ArrayList;
@@ -14,16 +15,25 @@ import java.util.ArrayList;
  * @author Wenqing
  */
 public class InsuranceManagingOrganization extends Organization {
+    private QuoteCatalogue qc;
 
-    public InsuranceManagingOrganization(String name) {
-        super(name);
+    public InsuranceManagingOrganization() {
+        super(Organization.Type.InsuranceManaging.getValue());
+        this.qc = new QuoteCatalogue();
     }
+
+    public QuoteCatalogue getQc() {
+        return qc;
+    }
+
+    public void setQc(QuoteCatalogue qc) {
+        this.qc = qc;
+    }     
 
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> list = new ArrayList<>();
         list.add(new InsuranceManagerRole());
         return list;
-    }
-    
+    }    
 }

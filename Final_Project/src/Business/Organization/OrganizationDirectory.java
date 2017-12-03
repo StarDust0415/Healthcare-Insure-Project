@@ -34,10 +34,12 @@ public class OrganizationDirectory {
             organizationList.add(organization);
         }else if (type.getValue().equals(Organization.Type.PeopleManaging.getValue())){
             organization = new PeopleManagingOrganization();
-            organizationList.add(organization);
-            
+            organizationList.add(organization);            
+        }
+        else if (type.getValue().equals(Organization.Type.InsuranceManaging.getValue())){
+            organization = new InsuranceManagingOrganization();
+            organizationList.add(organization);            
         }
         return organization;
-    }
-    
+    }    
 }

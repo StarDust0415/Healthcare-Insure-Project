@@ -28,7 +28,7 @@ public abstract class Organization {
         FundManaging("FundManaging Organization"),
         PeopleManaging("PeopleManaging Organization"),
         CharityAdmin("CharityAdmin Organization"),
-        OrderManaging("OrderManaging Organization");
+        InsuranceManaging("InsuranceManaging Organization");
         private String value;
         private Type(String value) {
             this.value = value;

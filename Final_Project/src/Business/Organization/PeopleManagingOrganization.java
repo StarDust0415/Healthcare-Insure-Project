@@ -21,7 +21,6 @@ public class PeopleManagingOrganization extends Organization {
     public PeopleManagingOrganization() {
         super(Organization.Type.PeopleManaging.getValue());
         this.hpd = new HomelessPeopleDirectory();
-        //System.out.println("123123");
     }
 
     public HomelessPeopleDirectory getHpd() {

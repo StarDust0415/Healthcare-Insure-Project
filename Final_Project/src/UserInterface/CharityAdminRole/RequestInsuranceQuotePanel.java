@@ -28,8 +28,8 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
      */
    
     public RequestInsuranceQuotePanel(JPanel card, UserAccount userAccount, CharityAdminOrganization organization, Enterprise enterprise, EcoSystem sys) {
-         initComponents();
-         initComponents();
+        initComponents();
+        initComponents();
         this.userProcessContainer = card;
         this.organization = organization;
         this.enterprise = enterprise;
