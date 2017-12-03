@@ -14,6 +14,7 @@ public class InsuranceQuote {
     private int price;
     private String provider;
     
+    
     public enum AgeType{
         Youth ("Youth: 0-25"),
         MiddleAged ("Middle Aged: 25-50"),

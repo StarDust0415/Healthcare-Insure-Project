@@ -8,7 +8,10 @@ package UserInterface.InsuranceManagerRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.InsuranceManagingOrganization;
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UserInterface.CharityAdminRole.RequestFundingPanel;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -16,14 +19,23 @@ import javax.swing.JPanel;
  * @author Wenqing
  */
 public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private InsuranceManagingOrganization organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    private EcoSystem sys;
     /**
      * Creates new form InsuranceManagerWorkAreaPanel
      */
     
 
-    public InsuranceManagerWorkAreaPanel(JPanel card, UserAccount account, InsuranceManagingOrganization insuranceManagingOrganization, Enterprise enterprise, EcoSystem business) {
+    public InsuranceManagerWorkAreaPanel(JPanel card, UserAccount account, InsuranceManagingOrganization org, Enterprise enterprise, EcoSystem business) {
         initComponents();
+         this.userProcessContainer = card;
+        this.organization = org;
+        this.enterprise = enterprise;
+        this.userAccount = account;
+        this.sys = business;
     }
 
     /**
@@ -35,19 +47,108 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        AddBut = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        ProcessBut = new javax.swing.JButton();
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Provider", "Total Premium", "Price", "Age Type"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Date", "People", "Type", "Status"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel1.setText("Insurance Quotes:");
+
+        AddBut.setText("Add New Quote");
+        AddBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Insurance Requests:");
+
+        ProcessBut.setText("Process Request");
+        ProcessBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProcessButActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ProcessBut)
+                    .addComponent(jLabel2)
+                    .addComponent(AddBut)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(AddBut)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ProcessBut)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AddButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButActionPerformed
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("AddQuotePanel", new AddQuotePanel(userProcessContainer, userAccount, organization, enterprise, sys));
+        layout.next(userProcessContainer);    }//GEN-LAST:event_AddButActionPerformed
+
+    private void ProcessButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcessButActionPerformed
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("ProcessRequestPanel", new ProcessRequestPanel(userProcessContainer, userAccount, organization, enterprise, sys));
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_ProcessButActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddBut;
+    private javax.swing.JButton ProcessBut;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

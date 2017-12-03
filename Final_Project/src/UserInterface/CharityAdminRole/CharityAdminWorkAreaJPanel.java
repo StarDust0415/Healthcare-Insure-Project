@@ -95,7 +95,6 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         PeopleInfoTable = new javax.swing.JTable();
         QuoteRequestBut = new javax.swing.JButton();
-        FundRequestBut = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -121,14 +120,6 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        FundRequestBut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        FundRequestBut.setText("Request Funding");
-        FundRequestBut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FundRequestButActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Homeless People Directory:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -148,15 +139,13 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(QuoteRequestBut)
-                                .addGap(67, 67, 67)
-                                .addComponent(FundRequestBut, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap()
+                                .addComponent(jLabel1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
+                .addGap(204, 204, 204)
+                .addComponent(QuoteRequestBut)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -169,20 +158,12 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(QuoteRequestBut)
-                    .addComponent(FundRequestBut))
-                .addGap(28, 28, 28))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(QuoteRequestBut)
+                .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void FundRequestButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FundRequestButActionPerformed
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestFundingPanel", new RequestFundingPanel(userProcessContainer, userAccount, organization, enterprise, sys));
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_FundRequestButActionPerformed
 
     private void QuoteRequestButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuoteRequestButActionPerformed
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -192,7 +173,6 @@ public class CharityAdminWorkAreaJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton FundRequestBut;
     private javax.swing.JTextField NameTxt;
     private javax.swing.JTable PeopleInfoTable;
     private javax.swing.JButton QuoteRequestBut;

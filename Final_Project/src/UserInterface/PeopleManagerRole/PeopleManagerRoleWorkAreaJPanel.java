@@ -124,7 +124,7 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
         btnDelete.setText("Delete");
 
         btnRequest.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        btnRequest.setText("Send a New Request");
+        btnRequest.setText("Send Request to Admin");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRequestActionPerformed(evt);
