@@ -13,6 +13,7 @@ import Business.Role.EnterpriseAdminRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -248,6 +249,10 @@ public class ManageAdminPanel extends javax.swing.JPanel {
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
 
+        if(nameJTextField.getText().trim().equals("") || passwordJPasswordField.getText().trim().equals("")||usernameJTextField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "You should fill all the blanks");
+        }else{
+        
         Enterprise enterprise = (Enterprise) enterpriseJComboBox.getSelectedItem();
 
         String username = usernameJTextField.getText();
@@ -259,6 +264,7 @@ public class ManageAdminPanel extends javax.swing.JPanel {
         UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new EnterpriseAdminRole());
         populateTable();
 
+        }
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed

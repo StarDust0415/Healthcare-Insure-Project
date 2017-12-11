@@ -12,6 +12,7 @@ import Business.Organization.OrganizationDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -251,6 +252,12 @@ public class ManageUserAccountPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backjButton1ActionPerformed
 
     private void createUserJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserJButtonActionPerformed
+
+
+        if(nameJTextField.getText().trim().equals("")||passwordJTextField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "You should fill all the blanks");
+        }else{
+
         String userName = nameJTextField.getText();
         String password = passwordJTextField.getText();
         Organization organization = (Organization) organizationJComboBox.getSelectedItem();
@@ -259,6 +266,7 @@ public class ManageUserAccountPanel extends javax.swing.JPanel {
 
         organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
         popData();
+        }
     }//GEN-LAST:event_createUserJButtonActionPerformed
 
     private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed
