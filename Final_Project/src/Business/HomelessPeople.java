@@ -5,6 +5,8 @@
  */
 package Business;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Wenqing
@@ -14,6 +16,17 @@ public class HomelessPeople {
     private String name;
     private String gender;
     private String medicalHistory;
+    
+    private ArrayList<InsuranceQuote>list;
+    
+    
+    public HomelessPeople(){
+        this.list=new ArrayList<>();
+    }
+
+    public ArrayList<InsuranceQuote> getList() {
+        return list;
+    }
 
     public int getAge() {
         return age;

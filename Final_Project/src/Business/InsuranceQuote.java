@@ -14,7 +14,17 @@ public class InsuranceQuote {
     private int price;
     private String provider;
     private AgeType age;
+    private static int count=0;
+    private int quoteid;
     
+    public InsuranceQuote(){
+        count++;
+        quoteid=count;
+    }
+    
+    public int getID(){
+        return quoteid;
+    }
     
     public enum AgeType{
         Youth ("Youth: 0-25"),
@@ -65,4 +75,8 @@ public class InsuranceQuote {
     public void setProvider(String provider) {
         this.provider = provider;
     }    
+    
+    public String toString(){
+        return Integer.toString(quoteid);
+    }
 }

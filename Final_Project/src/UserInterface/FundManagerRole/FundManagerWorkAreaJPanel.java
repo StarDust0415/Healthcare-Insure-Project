@@ -131,7 +131,8 @@ public class FundManagerWorkAreaJPanel extends javax.swing.JPanel {
         }
 
         FundRequest request = (FundRequest)workRequestJTable.getValueAt(selectedRow, 4);
-        request.setStatus("Processing");
+        request.setStatus("Approved");
+        populateTable();
     }//GEN-LAST:event_processJButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed

@@ -9,10 +9,17 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.HomelessPeople;
 import Business.InsuranceQuote;
+import Business.Network.Network;
 import Business.Organization.CharityAdminOrganization;
+import Business.Organization.InsuranceManagingOrganization;
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FundRequest;
+import Business.WorkQueue.InsuranceRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -37,6 +44,7 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
         this.userAccount = userAccount;
         this.sys = sys;
         populateCombo();
+        populateTable();
     }
     private void populateCombo(){
         for(InsuranceQuote.AgeType type: InsuranceQuote.AgeType.values()){
@@ -46,6 +54,21 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
         for(HomelessPeople people: sys.getHpd().getPeoplelist()){
             peopleCombo.addItem(people);
         }  
+    }
+    
+    private void populateTable(){
+        DefaultTableModel dtm = (DefaultTableModel) RequestTable.getModel();
+        Object[] row = new Object[4];
+        for(WorkRequest r: organization.getWorkQueue().getWorkRequestList()){
+            if (r instanceof InsuranceRequest){
+                InsuranceRequest ir =(InsuranceRequest) r;
+                row[0]=ir;
+                row[1]=ir.getPeople();
+                row[2]=ir.getType();
+                row[3]=ir.getStatus();      
+                dtm.addRow(row);
+            }            
+        }        
     }
 
     /**
@@ -66,6 +89,7 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         peopleCombo = new javax.swing.JComboBox();
         TypeCombo = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
 
         RequestTable.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         RequestTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -90,7 +114,8 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
 
         jLabel2.setText("Insurance Type:");
 
-        SendBut.setText("Send New Request");
+        SendBut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SendBut.setText("Send New Quote Request");
         SendBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SendButActionPerformed(evt);
@@ -99,65 +124,116 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
 
         jLabel3.setText("Requests Sent:");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("Insurance Quote Request Center");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(SendBut, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(FundRequestBut, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(peopleCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(143, 143, 143))))
+                            .addComponent(TypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(SendBut, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(FundRequestBut, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(peopleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FundRequestBut)
-                    .addComponent(SendBut))
-                .addGap(49, 49, 49))
+                .addGap(28, 28, 28)
+                .addComponent(SendBut)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(FundRequestBut)
+                .addGap(35, 35, 35))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void FundRequestButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FundRequestButActionPerformed
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestFundingPanel", new RequestFundingPanel(userProcessContainer, userAccount, organization, enterprise, sys));
-        layout.next(userProcessContainer);
+        int selectedRequest = RequestTable.getSelectedRow();
+        if (selectedRequest < 0){
+            return;
+        } 
+        else{
+            InsuranceRequest request = (InsuranceRequest)RequestTable.getValueAt(selectedRequest, 0);
+            InsuranceQuote quote = request.getAssignedQuote();
+
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            userProcessContainer.add("RequestFundingPanel", new RequestFundingPanel(userProcessContainer, userAccount, organization, enterprise, sys, quote));
+            layout.next(userProcessContainer);
+        }        
     }//GEN-LAST:event_FundRequestButActionPerformed
 
     private void SendButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendButActionPerformed
-        // TODO add your handling code here:
+        InsuranceRequest request = new InsuranceRequest();
+        
+        organization.getWorkQueue().getWorkRequestList().add(request);
+        System.out.println(organization.getWorkQueue().getWorkRequestList());
+        
+        HomelessPeople selected =(HomelessPeople) peopleCombo.getSelectedItem();
+        InsuranceQuote.AgeType type = (InsuranceQuote.AgeType) TypeCombo.getSelectedItem();
+        
+        request.setPeople(selected);
+        request.setStatus("Sent");
+        request.setType(type);
+        
+        populateTable();
+                
+        
+        Organization receiverorg = null;
+        for (Network n: sys.getNetworkList()){
+            for (Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
+                for (Organization o: e.getOrganizationDirectory().getOrganizationList()){
+                    if (o instanceof InsuranceManagingOrganization){
+                        receiverorg = o;
+                        request.setReceiver(o);
+                        System.out.println(receiverorg);
+                        receiverorg.getWorkQueue().getWorkRequestList().add(request);
+                        break;
+                    }                    
+                }
+            }
+        }
+        if (receiverorg!=null){
+            receiverorg.getWorkQueue().getWorkRequestList().add(request);
+        }
     }//GEN-LAST:event_SendButActionPerformed
 
 
@@ -169,6 +245,7 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox peopleCombo;
     // End of variables declaration//GEN-END:variables

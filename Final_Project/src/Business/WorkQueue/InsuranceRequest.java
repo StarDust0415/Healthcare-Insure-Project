@@ -6,6 +6,8 @@
 package Business.WorkQueue;
 
 import Business.HomelessPeople;
+import Business.InsuranceQuote;
+import Business.InsuranceQuote.AgeType;
 
 /**
  *
@@ -13,6 +15,17 @@ import Business.HomelessPeople;
  */
 public class InsuranceRequest extends WorkRequest {
     private HomelessPeople people;
+    private AgeType type;
+    
+    private InsuranceQuote assignedQuote;
+
+    public InsuranceQuote getAssignedQuote() {
+        return assignedQuote;
+    }
+
+    public void setAssignedQuote(InsuranceQuote assignedQuote) {
+        this.assignedQuote = assignedQuote;
+    }
 
     public HomelessPeople getPeople() {
         return people;
@@ -20,5 +33,13 @@ public class InsuranceRequest extends WorkRequest {
 
     public void setPeople(HomelessPeople people) {
         this.people = people;
+    }
+
+    public AgeType getType() {
+        return type;
+    }
+
+    public void setType(AgeType type) {
+        this.type = type;
     }
 }
