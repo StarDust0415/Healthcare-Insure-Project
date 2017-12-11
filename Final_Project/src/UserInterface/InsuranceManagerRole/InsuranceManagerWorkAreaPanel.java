@@ -17,6 +17,7 @@ import Business.WorkQueue.InsuranceRequest;
 import Business.WorkQueue.WorkRequest;
 import UserInterface.CharityAdminRole.RequestFundingPanel;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,11 +46,14 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
         populateQuoteTable();
         populateRequestTable();
         NameTxt.setText(organization.getName());
+        
+        
+        
     }
     
     public void populateQuoteTable(){
-        DefaultTableModel model = (DefaultTableModel)QuoteTable.getModel();
-        model.setRowCount(0);
+        DefaultTableModel model1 = (DefaultTableModel)QuoteTable.getModel();
+        model1.setRowCount(0);
         
         QuoteCatalogue qc = organization.getQc();
         for(InsuranceQuote quote: qc.getList()){
@@ -60,7 +64,7 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
             row[3] = quote.getPrice();
             row[4] = quote.getAge();
 
-            model.addRow(row);            
+            model1.addRow(row);            
         }
     }
     private void populateRequestTable(){
@@ -200,11 +204,15 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);    }//GEN-LAST:event_AddButActionPerformed
 
     private void assignButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignButActionPerformed
+
         int selectedRequest = RequestTable.getSelectedRow();
         int selectedQuote = QuoteTable.getSelectedRow();
-        if (selectedRequest < 0 || selectedQuote < 0 ){
+        
+        if(selectedRequest <0 ||selectedQuote <0){
+            JOptionPane.showMessageDialog(null, "you should select a row from each of the above table");
+            
             return;
-        }
+        }else{
         
         InsuranceQuote quote = (InsuranceQuote)QuoteTable.getValueAt(selectedQuote, 0);
 
@@ -213,6 +221,10 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
         request.setStatus("Processed");
         HomelessPeople people = request.getPeople();
         people.getList().add(quote);
+        
+        populateRequestTable();
+        }
+        
     }//GEN-LAST:event_assignButActionPerformed
 
 

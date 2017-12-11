@@ -92,8 +92,6 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
         NameTxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         requestTable = new javax.swing.JTable();
-        btnView = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         HomelessTable = new javax.swing.JTable();
@@ -115,12 +113,6 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(requestTable);
-
-        btnView.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        btnView.setText("View Details & Update");
-
-        btnDelete.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        btnDelete.setText("Delete");
 
         btnRequest.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnRequest.setText("Send Request to Admin");
@@ -161,19 +153,14 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                        .addComponent(btnView)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete))
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAdd)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addGap(0, 466, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,10 +185,7 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnView)
-                    .addComponent(btnDelete))
+                .addComponent(btnAdd)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,9 +215,7 @@ public class PeopleManagerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JTable HomelessTable;
     private javax.swing.JTextField NameTxt;
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnRequest;
-    private javax.swing.JButton btnView;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

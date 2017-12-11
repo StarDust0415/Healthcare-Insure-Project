@@ -14,6 +14,7 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.FundRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -37,6 +38,13 @@ public class SendFundRequestPanel extends javax.swing.JPanel {
         this.sys = system;
         NameTxt.setText(enterprise.getName());
     }
+    
+        public final static boolean isNumberic(String s){
+            if(s != null && !"".equals(s.trim()))
+                return s.matches("^[0-9]*$");
+            else
+                return false;
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -125,6 +133,11 @@ public class SendFundRequestPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
+        if(isNumberic(messageJTextField.getText()) == false){
+            JOptionPane.showMessageDialog(null, "you should input a integer for funding");
+        }else {
+        
+        
         int amount = Integer.parseInt(messageJTextField.getText());
 
         FundRequest request = new FundRequest();
@@ -152,6 +165,7 @@ public class SendFundRequestPanel extends javax.swing.JPanel {
 
         if (receiverorg!=null){
             receiverorg.getWorkQueue().getWorkRequestList().add(request);
+        }
         }
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 

@@ -18,6 +18,7 @@ import Business.WorkQueue.FundRequest;
 import Business.WorkQueue.InsuranceRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -189,16 +190,25 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
     private void FundRequestButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FundRequestButActionPerformed
         int selectedRequest = RequestTable.getSelectedRow();
         if (selectedRequest < 0){
-            return;
+            JOptionPane.showMessageDialog(null, "you should select a row");
         } 
+            
+            
         else{
             InsuranceRequest request = (InsuranceRequest)RequestTable.getValueAt(selectedRequest, 0);
+            
+            if(request.getStatus().equals("Sent")){
+                JOptionPane.showMessageDialog(null, "request has not been processed");
+            }else{
+            
+            
             InsuranceQuote quote = request.getAssignedQuote();
 
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             userProcessContainer.add("RequestFundingPanel", new RequestFundingPanel(userProcessContainer, userAccount, organization, enterprise, sys, quote));
             layout.next(userProcessContainer);
         }        
+        }
     }//GEN-LAST:event_FundRequestButActionPerformed
 
     private void SendButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendButActionPerformed
@@ -214,7 +224,6 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
         request.setStatus("Sent");
         request.setType(type);
         
-        populateTable();
                 
         
         Organization receiverorg = null;
@@ -234,6 +243,8 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
         if (receiverorg!=null){
             receiverorg.getWorkQueue().getWorkRequestList().add(request);
         }
+        
+                populateTable();
     }//GEN-LAST:event_SendButActionPerformed
 
 

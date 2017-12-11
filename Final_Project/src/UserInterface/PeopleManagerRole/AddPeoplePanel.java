@@ -14,6 +14,7 @@ import Business.Organization.PeopleManagingOrganization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -161,6 +162,14 @@ public class AddPeoplePanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        //vali
+        if(txtName.getText().trim().equals("")||txtAge.getText().trim().equals("")||txtGender.getText().trim().equals("")||txtMedicalHistory.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "you should input all the information");
+        }else if(isNumberic(txtAge.getText())== false){
+            JOptionPane.showMessageDialog(null, "you should input a integer for age");
+        }else{
+        
+        
         HomelessPeopleDirectory hpd = sys.getHpd();
         HomelessPeople people = sys.getHpd().addPeople();
         
@@ -176,11 +185,17 @@ public class AddPeoplePanel extends javax.swing.JPanel {
         people.setMedicalHistory(medicalHistory);
         
         System.out.print(name);
-        
+        }
         
     }//GEN-LAST:event_btnAddActionPerformed
 
 
+        public final static boolean isNumberic(String s){
+            if(s != null && !"".equals(s.trim()))
+                return s.matches("^[0-9]*$");
+            else
+                return false;
+        }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAdd;

@@ -14,6 +14,7 @@ import Business.UserAccount.UserAccount;
 import UserInterface.PeopleManagerRole.PeopleManagerRoleWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -165,6 +166,15 @@ public class AddQuotePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButActionPerformed
+    if(PremiumTxt.getText().trim().equals("") || PriceTxt.getText().trim().equals("")){
+        JOptionPane.showMessageDialog(null, "you should input all the information");
+    }else if(isNumberic(PremiumTxt.getText() ) == false || isNumberic(PriceTxt.getText()) == false  ){
+        JOptionPane.showMessageDialog(null, "you should input a integer for total premiumtxt and price");
+    }else{
+    
+    
+    
+        
     InsuranceQuote quote = organization.getQc().addQuote();
     String provider =(String) InsuranceCombo.getSelectedItem();
     int premium = Integer.parseInt((String)PremiumTxt.getText());
@@ -175,9 +185,15 @@ public class AddQuotePanel extends javax.swing.JPanel {
     quote.setAge(type);
     quote.setPrice(price);
     quote.setTotalPremium(premium);
-    
+    }
     }//GEN-LAST:event_AddButActionPerformed
 
+    public final static boolean isNumberic(String s){
+            if(s != null && !"".equals(s.trim()))
+                return s.matches("^[0-9]*$");
+            else
+                return false;
+        }
     private void BackButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButActionPerformed
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
