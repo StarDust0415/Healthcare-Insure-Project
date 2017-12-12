@@ -54,7 +54,6 @@ public class MainJFrame extends javax.swing.JFrame {
                     
                     
                         ImageIcon icon = new ImageIcon(path[i]);
-                        System.out.println(path[i]);
                         icon.setImage(icon.getImage().getScaledInstance(400,200,Image.SCALE_DEFAULT));
                         picLable.setIcon(icon);
                         i++;
