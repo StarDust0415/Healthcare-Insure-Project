@@ -32,10 +32,9 @@ public class MainJFrame extends javax.swing.JFrame {
     private static int i;
     
     private String[] path = {
-    "pic/pic1.png",
-    "pic/pic2.jpeg",
-    "pic/pic3.jpg",
-    
+        "pic/pic1.png",
+        "pic/pic2.jpeg",
+        "pic/pic3.jpg",
     };
     /**
      * Creates new form MainJFrame
@@ -50,9 +49,6 @@ public class MainJFrame extends javax.swing.JFrame {
                 @Override
                 
                 public void actionPerformed(ActionEvent e) {
-                    
-                    
-                    
                         ImageIcon icon = new ImageIcon(path[i]);
                         icon.setImage(icon.getImage().getScaledInstance(400,200,Image.SCALE_DEFAULT));
                         picLable.setIcon(icon);
@@ -62,10 +58,6 @@ public class MainJFrame extends javax.swing.JFrame {
                      }
             });
             timer.start();
-        
-        
-        
-        
     }
 
     /**

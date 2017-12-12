@@ -45,10 +45,7 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
         this.sys = business;
         populateQuoteTable();
         populateRequestTable();
-        NameTxt.setText(organization.getName());
-        
-        
-        
+        NameTxt.setText(organization.getName());        
     }
     
     public void populateQuoteTable(){
@@ -185,10 +182,10 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(AddBut)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,27 +201,25 @@ public class InsuranceManagerWorkAreaPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);    }//GEN-LAST:event_AddButActionPerformed
 
     private void assignButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignButActionPerformed
-
         int selectedRequest = RequestTable.getSelectedRow();
         int selectedQuote = QuoteTable.getSelectedRow();
         
         if(selectedRequest <0 ||selectedQuote <0){
-            JOptionPane.showMessageDialog(null, "you should select a row from each of the above table");
-            
+            JOptionPane.showMessageDialog(null, "you should select a row from each of the above table");            
             return;
-        }else{
-        
-        InsuranceQuote quote = (InsuranceQuote)QuoteTable.getValueAt(selectedQuote, 0);
-
-        InsuranceRequest request = (InsuranceRequest)RequestTable.getValueAt(selectedRequest, 0);
-        request.setAssignedQuote(quote);
-        request.setStatus("Processed");
-        HomelessPeople people = request.getPeople();
-        people.getList().add(quote);
-        
-        populateRequestTable();
         }
-        
+        else{        
+            InsuranceQuote quote = (InsuranceQuote)QuoteTable.getValueAt(selectedQuote, 0);
+
+            InsuranceRequest request = (InsuranceRequest)RequestTable.getValueAt(selectedRequest, 0);
+            request.setAssignedQuote(quote);
+            request.setStatus("Processed");
+            HomelessPeople people = request.getPeople();
+            people.getList().add(quote);
+
+            populateRequestTable();
+        }
+        JOptionPane.showMessageDialog(null, "Insurance quote succesfully assigned!!");
     }//GEN-LAST:event_assignButActionPerformed
 
 

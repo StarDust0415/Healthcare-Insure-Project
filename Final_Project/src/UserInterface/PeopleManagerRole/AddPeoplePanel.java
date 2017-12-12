@@ -167,26 +167,29 @@ public class AddPeoplePanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "you should input all the information");
         }else if(isNumberic(txtAge.getText())== false){
             JOptionPane.showMessageDialog(null, "you should input a integer for age");
-        }else{
-        
-        
-        HomelessPeopleDirectory hpd = sys.getHpd();
-        HomelessPeople people = sys.getHpd().addPeople();
-        
-        
-        String name = txtName.getText();
-        int age = Integer.parseInt(txtAge.getText());
-        String gender = txtGender.getText();
-        String medicalHistory = txtMedicalHistory.getText();
-        
-        people.setName(name);
-        people.setAge(age);
-        people.setGender(gender);
-        people.setMedicalHistory(medicalHistory);
-        
-        System.out.print(name);
+        }else{             
+            HomelessPeopleDirectory hpd = sys.getHpd();
+            HomelessPeople people = sys.getHpd().addPeople();
+
+
+            String name = txtName.getText();
+            int age = Integer.parseInt(txtAge.getText());
+            String gender = txtGender.getText();
+            String medicalHistory = txtMedicalHistory.getText();
+
+            people.setName(name);
+            people.setAge(age);
+            people.setGender(gender);
+            people.setMedicalHistory(medicalHistory);
+
+            System.out.print(name);
         }
         
+        JOptionPane.showMessageDialog(null, "People sucessfully added!");
+        txtName.setText("");
+        txtAge.setText("");
+        txtGender.setText("");
+        txtMedicalHistory.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
 

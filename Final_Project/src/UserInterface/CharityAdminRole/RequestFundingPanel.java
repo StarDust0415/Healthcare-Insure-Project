@@ -16,6 +16,7 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.FundRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -117,8 +118,12 @@ public class RequestFundingPanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Quote ID:");
 
+        idTxt.setEnabled(false);
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Quote Price: ");
+
+        priceTxt.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -190,18 +195,18 @@ public class RequestFundingPanel extends javax.swing.JPanel {
                     if (o instanceof FundManagingOrganization){
                         receiverorg = o;
                         request.setReceiver(o);
-                        System.out.println(receiverorg);
-                        receiverorg.getWorkQueue().getWorkRequestList().add(request);
+                        //System.out.println(receiverorg);
+                        //receiverorg.getWorkQueue().getWorkRequestList().add(request);
                         break;
                     }                    
                 }
             }
         }
-
         if (receiverorg!=null){
             receiverorg.getWorkQueue().getWorkRequestList().add(request);
-        }
-         populateRequestTable();
+        }        
+        populateRequestTable();
+        JOptionPane.showMessageDialog(null, "Request sent to financial agency successfully");
     }//GEN-LAST:event_SendButActionPerformed
 
 

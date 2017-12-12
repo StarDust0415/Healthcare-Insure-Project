@@ -168,24 +168,25 @@ public class AddQuotePanel extends javax.swing.JPanel {
     private void AddButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButActionPerformed
     if(PremiumTxt.getText().trim().equals("") || PriceTxt.getText().trim().equals("")){
         JOptionPane.showMessageDialog(null, "you should input all the information");
-    }else if(isNumberic(PremiumTxt.getText() ) == false || isNumberic(PriceTxt.getText()) == false  ){
-        JOptionPane.showMessageDialog(null, "you should input a integer for total premiumtxt and price");
-    }else{
-    
-    
-    
-        
-    InsuranceQuote quote = organization.getQc().addQuote();
-    String provider =(String) InsuranceCombo.getSelectedItem();
-    int premium = Integer.parseInt((String)PremiumTxt.getText());
-    int price = Integer.parseInt((String)PriceTxt.getText());
-    AgeType type =(AgeType) AgeCombo.getSelectedItem();
-    
-    quote.setProvider(provider);
-    quote.setAge(type);
-    quote.setPrice(price);
-    quote.setTotalPremium(premium);
     }
+    else if(isNumberic(PremiumTxt.getText() ) == false || isNumberic(PriceTxt.getText()) == false  ){
+        JOptionPane.showMessageDialog(null, "you should input a integer for total premiumtxt and price");
+    }
+    else{
+        InsuranceQuote quote = organization.getQc().addQuote();
+        String provider =(String) InsuranceCombo.getSelectedItem();
+        int premium = Integer.parseInt((String)PremiumTxt.getText());
+        int price = Integer.parseInt((String)PriceTxt.getText());
+        AgeType type =(AgeType) AgeCombo.getSelectedItem();
+
+        quote.setProvider(provider);
+        quote.setAge(type);
+        quote.setPrice(price);
+        quote.setTotalPremium(premium);
+    }
+    JOptionPane.showMessageDialog(null, "Quote successfully added!");
+    PremiumTxt.setText("");
+    PriceTxt.setText("");
     }//GEN-LAST:event_AddButActionPerformed
 
     public final static boolean isNumberic(String s){

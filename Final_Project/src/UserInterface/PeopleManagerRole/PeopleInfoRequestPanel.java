@@ -17,6 +17,7 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.PeopleInfoRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -69,6 +70,7 @@ public class PeopleInfoRequestPanel extends javax.swing.JPanel {
         InsuranceCombo = new javax.swing.JComboBox();
         SubmitButton = new javax.swing.JButton();
         BackBut = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Insurance Type:");
@@ -91,14 +93,13 @@ public class PeopleInfoRequestPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Send Insurance Request - Homeless People");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(205, 205, 205)
-                .addComponent(SubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(114, 114, 114)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,13 +115,23 @@ public class PeopleInfoRequestPanel extends javax.swing.JPanel {
                             .addComponent(PeopleCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(InsuranceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(107, 107, 107))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(205, 205, 205)
+                .addComponent(SubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(149, 149, 149))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(55, 55, 55)
+                .addComponent(jLabel1)
+                .addGap(60, 60, 60)
                 .addComponent(BackBut)
-                .addGap(62, 62, 62)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(PeopleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -128,7 +139,7 @@ public class PeopleInfoRequestPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(InsuranceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(81, 81, 81)
+                .addGap(54, 54, 54)
                 .addComponent(SubmitButton)
                 .addContainerGap(92, Short.MAX_VALUE))
         );
@@ -161,7 +172,8 @@ public class PeopleInfoRequestPanel extends javax.swing.JPanel {
         }
         if(org !=null){
             org.getWorkQueue().getWorkRequestList().add(request);
-        }        
+        }   
+        JOptionPane.showMessageDialog(null, "Request sent successfully!");
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
 
@@ -170,6 +182,7 @@ public class PeopleInfoRequestPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox InsuranceCombo;
     private javax.swing.JComboBox PeopleCombo;
     private javax.swing.JButton SubmitButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables

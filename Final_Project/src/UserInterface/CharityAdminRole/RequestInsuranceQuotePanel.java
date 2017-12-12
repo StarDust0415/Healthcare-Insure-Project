@@ -191,23 +191,20 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
         int selectedRequest = RequestTable.getSelectedRow();
         if (selectedRequest < 0){
             JOptionPane.showMessageDialog(null, "you should select a row");
-        } 
-            
-            
+        }             
         else{
             InsuranceRequest request = (InsuranceRequest)RequestTable.getValueAt(selectedRequest, 0);
             
             if(request.getStatus().equals("Sent")){
-                JOptionPane.showMessageDialog(null, "request has not been processed");
-            }else{
-            
-            
-            InsuranceQuote quote = request.getAssignedQuote();
+                JOptionPane.showMessageDialog(null, "Request has not been processed by insurance agency");
+            }
+            else{                 
+                InsuranceQuote quote = request.getAssignedQuote();
 
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            userProcessContainer.add("RequestFundingPanel", new RequestFundingPanel(userProcessContainer, userAccount, organization, enterprise, sys, quote));
-            layout.next(userProcessContainer);
-        }        
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                userProcessContainer.add("RequestFundingPanel", new RequestFundingPanel(userProcessContainer, userAccount, organization, enterprise, sys, quote));
+                layout.next(userProcessContainer);
+            }        
         }
     }//GEN-LAST:event_FundRequestButActionPerformed
 
@@ -234,7 +231,7 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
                         receiverorg = o;
                         request.setReceiver(o);
                         System.out.println(receiverorg);
-                        receiverorg.getWorkQueue().getWorkRequestList().add(request);
+                        //receiverorg.getWorkQueue().getWorkRequestList().add(request);
                         break;
                     }                    
                 }
@@ -244,7 +241,10 @@ public class RequestInsuranceQuotePanel extends javax.swing.JPanel {
             receiverorg.getWorkQueue().getWorkRequestList().add(request);
         }
         
-                populateTable();
+        populateTable();
+                
+        JOptionPane.showMessageDialog(null, "Request sent to insurance agency!");
+
     }//GEN-LAST:event_SendButActionPerformed
 
 
